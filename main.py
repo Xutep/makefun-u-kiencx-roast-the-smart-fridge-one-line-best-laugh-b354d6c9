@@ -15,6 +15,10 @@ ROAST = (
 
 
 def main() -> None:
+    if not 1 <= len(ROAST) <= 160 or not ROAST.strip():
+        raise ValueError("roast must be 1-160 non-blank characters")
+    if "\n" in ROAST:
+        raise ValueError("roast must be a single line")
     output = Path(os.environ.get("ENTRY_OUTPUT", "/output/entry.txt"))
     output.parent.mkdir(parents=True, exist_ok=True)
     # One line, no trailing newline: exactly the roast, byte-identical each run.
